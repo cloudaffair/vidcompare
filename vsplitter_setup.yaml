@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: vsplitter-node
+  namespace: ots
+  labels:
+    app: vsplitter
+spec:
+  replicas: 1
+  template:
+    metadata:
+      namespace: ots
+      labels:
+        app: vsplitter
+    spec:
+      containers:
+      - name: vsplitter-service
+        image: registry.sjc1.splat.ooyala.com:5000/ooyala/vsplitter:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        env:
+        - name: environment
+          value: "next-staging"
